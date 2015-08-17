@@ -7,7 +7,7 @@
 
     <style name="RedTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#ffff4444</item>
-
+        <item name="android:colorPrimaryDark">#ffcc0000</item>
         <!--<item name="android:background">#28ff6c6e</item> -->
     </style>
 
