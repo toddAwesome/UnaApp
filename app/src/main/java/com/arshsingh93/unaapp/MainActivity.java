@@ -1,9 +1,6 @@
 package com.arshsingh93.unaapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             navigateToEnter();
         } else if (id == R.id.action_new) {
             Toast.makeText(this, "clicked New", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, CreateGroup.class);
+            Intent intent = new Intent(this, CreateGroupActivity.class);
             startActivity(intent);
         } else if (id == R.id.action_inbox) {
             Toast.makeText(this, "clicked inbox", Toast.LENGTH_SHORT).show();
