@@ -19,6 +19,6 @@ public class TheColorUtil {
      * @return a darker version of the preferred color.
      */
     public static int getDarkProperColor() {
-        return 0xCC0000;
+        return 0xFFCC0000;
     }
 }

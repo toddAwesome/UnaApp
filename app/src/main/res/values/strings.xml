@@ -20,5 +20,6 @@
         <item>Choose Picture from Gallery</item>
     </string-array>
     <string name="title_activity_create_group">createGroup</string>
+    <string name="title_activity_view_group">ViewGroupActivity</string>
 
 </resources>

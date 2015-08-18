@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -21,7 +24,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     @Bind(R.id.createGroupNameText) TextView myName;
     @Bind(R.id.createGroupOneText) TextView myOneWord;
-    @Bind(R.id.createGroupPrivateButton) RadioButton myPrivateButton;
+    @Bind(R.id.createGroupPrivateButton) CheckBox myPrivateCheck;
     @Bind(R.id.createGroupLengthyText) TextView myDescription;
     @Bind(R.id.createGroupBlogCheck) CheckBox myBlogCheck;
     @Bind(R.id.createGroupCalendarCheck) CheckBox myCalendarCheck;
@@ -39,25 +42,44 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Creates the group on parse by taking in information from the various fields on the xml that matches this activity.
+     * If the network is not available when user attempts to create a group, then the user will be given the option
+     * of having the group get automatically created when network becomes available.
+     */
     @OnClick(R.id.createGroupButton)
-    public void createGroup() {
+    public void createGroup(View view) {
+
         final ParseObject groupObject = new ParseObject("Group");
 
         if (createValid()) {
             groupObject.put(TheGroupUtil.GROUP_NAME, myName.getText().toString());
-            //groupObject.put(TheGroupUtil.GROUP_TYPE, getGroupType());
+            groupObject.put(TheGroupUtil.GROUP_TYPE, getGroupType());
             groupObject.put(TheGroupUtil.GROUP_FOUNDER, ParseUser.getCurrentUser());
-            groupObject.put(TheGroupUtil.GROUP_ONE_WORD, myOneWord.getText().toString());
+            groupObject.put(TheGroupUtil.GROUP_ONE_WORD, myOneWord.getText().toString().toLowerCase());
             groupObject.put(TheGroupUtil.GROUP_LENGTHY_DESCRIPTION, myDescription.getText().toString());
-            //groupObject.put(TheGroupUtil.GROUP_BLOG_EXIST, getBlogCheck());
-            //groupObject.put(TheGroupUtil.GROUP_CALENDAR_EXIST, getCalendarCheck());
-            //groupObject.put(TheGroupUtil.GROUP_SIZE, getGroupSize());
+            groupObject.put(TheGroupUtil.GROUP_BLOG_EXIST, getBlogCheck());
+            groupObject.put(TheGroupUtil.GROUP_CALENDAR_EXIST, getCalendarCheck());
+
+            ParseRelation members = groupObject.getRelation(TheGroupUtil.GROUP_MEMBERS);
+            members.add(ParseUser.getCurrentUser());
+
+            ParseRelation moderators = groupObject.getRelation(TheGroupUtil.GROUP_MODERATORS);
+            moderators.add(ParseUser.getCurrentUser());
+
+            groupObject.put(TheGroupUtil.GROUP_SIZE, 1); //the first member is the founder.
 
             if (TheNetUtil.isNetworkAvailable(this)) {
+                Toast.makeText(this, "network is available", Toast.LENGTH_SHORT).show();
                 groupObject.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        //send user to the group looker page.
+                        if (e == null) {
+                            Toast.makeText(CreateGroupActivity.this, "You group has been created", Toast.LENGTH_LONG).show();
+                            //send user to the group looker page.
+                        } else {
+                            Toast.makeText(CreateGroupActivity.this, "Error : " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             } else {
@@ -75,10 +97,12 @@ public class CreateGroupActivity extends AppCompatActivity {
 
             }
         } else {
+            /* //NOTE: A dialog pops up due to the createValid() method so the following dialog is unnecessary.
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Can not create group").setMessage("Please make sure all of the information is filled out");
             builder.setPositiveButton(android.R.string.ok, null);
             builder.show();
+            */
         }
     }
 
@@ -97,6 +121,33 @@ public class CreateGroupActivity extends AppCompatActivity {
 
         return true; //if no problem encountered.
     }
+
+    private String getGroupType() {
+        if (myPrivateCheck.isChecked()) {
+            return TheGroupUtil.GROUP_PRIVATE;
+        } else if (!myPrivateCheck.isChecked()) {
+            return TheGroupUtil.GROUP_PUBLIC;
+        }
+        //default
+        return TheGroupUtil.GROUP_PUBLIC;
+    }
+
+    /**
+     * Checks to see if the blog button is marked.
+     * @return true if it is.
+     */
+    private boolean getBlogCheck() {
+        return myBlogCheck.isChecked();
+    }
+
+    /**
+     * Checks to see if the calendar button is checked.
+     * @return true if it is.
+     */
+    private boolean getCalendarCheck() {
+        return myCalendarCheck.isChecked();
+    }
+
 
 
 
