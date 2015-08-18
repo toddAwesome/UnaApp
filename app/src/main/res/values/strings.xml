@@ -15,4 +15,10 @@
 
     <string name="hello_world">Hello world!</string>
 
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Choose Picture from Gallery</item>
+    </string-array>
+    <string name="title_activity_create_group">createGroup</string>
+
 </resources>

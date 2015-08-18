@@ -1,7 +1,10 @@
 package com.arshsingh93.unaapp;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -10,17 +13,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -38,6 +51,32 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
 
+        myUsername.setText(ParseUser.getCurrentUser().getUsername());
+
+
+        if (ParseUser.getCurrentUser().get("profilePic") != null) {
+            ParseFile picFile = (ParseFile) ParseUser.getCurrentUser().get("profilePic");
+            picFile.getDataInBackground(new GetDataCallback() {
+                @Override
+                public void done(byte[] bytes, ParseException e) {
+                    if (e == null) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        myPhoto.setImageBitmap(bitmap);
+                    } else {
+                        //unable to load image. //TODO
+                    }
+                }
+
+            });
+        }
+    }
+
+    @OnClick (R.id.settingsPhoto)
+    public void choosePhoto(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setItems(R.array.camera_choices, mDialogInterface);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -48,6 +87,62 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    /**
+     * Set the profile image of this account
+     * @param theUri the uri for the photo
+     */
+    private void setImage(Uri theUri) {
+        Log.d("ProfileFragment", "Here in setImage with uri: " + theUri);
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), theUri);
+            Log.d("ProfileFragment", "bitmap is: " + bitmap.toString());
+            myPhoto.setImageBitmap(bitmap);
+
+            //send to parse
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] array = stream.toByteArray();
+            ParseFile file = new ParseFile("profilePic.jpeg", array);
+            file.saveInBackground();
+            ParseUser.getCurrentUser().put("profilePic", file);
+            ParseUser.getCurrentUser().saveInBackground(); //is this necessary?
+
+
+        } catch (FileNotFoundException e) {
+            Log.e("ProfileFragment", "Error: " + e);
+        } catch (IOException e) {
+            Log.e("ProfileFragment", "Error: " + e);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("ProfileFragment", "Here in onActivityResult with requestCode: " + requestCode + " , resultCode: " +
+                resultCode  + " , data: " + data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == this.RESULT_OK) {
+            if (requestCode == CHOOSE_PHOTO_REQUEST) {
+                if (data == null) {
+                    Toast.makeText(this, "Sorry, there was an error", Toast.LENGTH_LONG).show();
+                } else {
+                    mMediaUri = data.getData();
+                    Log.d("ProfileFragment", "Here in onActivityResult's if if else.");
+                    setImage(mMediaUri);
+                }
+            } else {
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                mediaScanIntent.setData(mMediaUri);
+                this.sendBroadcast(mediaScanIntent);
+                setImage(mMediaUri);
+                Log.d("ProfileFragment", "Here in onActivityResult's if else.");
+            }
+        } else if (resultCode != this.RESULT_CANCELED) {
+            Toast.makeText(this, "Sorry, there was an error", Toast.LENGTH_LONG).show();
+
+        }
+    }
 
 
 

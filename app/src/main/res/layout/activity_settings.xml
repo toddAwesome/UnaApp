@@ -12,14 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:weightSum="2">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/settingsPhoto"
                 android:minHeight="150dp"
@@ -28,10 +30,9 @@
                 android:maxHeight="150dp"
                 android:nestedScrollingEnabled="false"
                 android:src="@drawable/ic_portrait_white_48dp"
-                android:layout_alignTop="@+id/settingsUsername"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-        </FrameLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -49,20 +49,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * Check to see if the network is available.
-     * @return true if there is access to the internet, false otherwise.
-     */
-    private boolean isNetworkAvailable() {
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = manager.getActiveNetworkInfo();
-        boolean isAvailable = false;
-        if (info != null && info.isConnected()) {
-            isAvailable = true;
-        }
-        Log.v(TAG, "net is " + isAvailable);
-        return isAvailable;
-    }
+
 
 
     @Override
@@ -82,11 +69,17 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
-        }
-
-        if (id == R.id.action_logout) {
+        } else if (id == R.id.action_logout) {
             ParseUser.logOut();
             navigateToEnter();
+        } else if (id == R.id.action_new) {
+            Toast.makeText(this, "clicked New", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, CreateGroup.class);
+            startActivity(intent);
+        } else if (id == R.id.action_inbox) {
+            Toast.makeText(this, "clicked inbox", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_search) {
+            Toast.makeText(this, "clicked search", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
