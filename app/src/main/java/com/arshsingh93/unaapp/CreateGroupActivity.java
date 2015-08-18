@@ -2,6 +2,7 @@ package com.arshsingh93.unaapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        setTheme(R.style.RedTheme);
         setContentView(R.layout.activity_create_group);
         ButterKnife.bind(this);
 
@@ -77,6 +79,11 @@ public class CreateGroupActivity extends AppCompatActivity {
                         if (e == null) {
                             Toast.makeText(CreateGroupActivity.this, "You group has been created", Toast.LENGTH_LONG).show();
                             //send user to the group looker page.
+                            Intent intent = new Intent(CreateGroupActivity.this, ViewGroupActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); //this prevents you from getting back to the previous page.
+                            startActivity(intent);
+
                         } else {
                             Toast.makeText(CreateGroupActivity.this, "Error : " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }

@@ -4,14 +4,54 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.TextView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ViewGroupActivity extends AppCompatActivity {
+
+    @Bind(R.id.viewGroupBlogButton) Button myBlogButton;
+    @Bind(R.id.viewGroupMemberButton) Button myMemberButton;
+    @Bind(R.id.viewGroupEventButton) Button myEventButton;
+    @Bind(R.id.viewGroupLengthyText) TextView myDescription;
+    @Bind(R.id.viewGroupTypeImage) TextView myTypeImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.RedTheme);
         setContentView(R.layout.activity_view_group);
+        ButterKnife.bind(this);
+
+        myBlogButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
+        myMemberButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
+        myEventButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

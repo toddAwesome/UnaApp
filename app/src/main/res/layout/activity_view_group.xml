@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/viewGroupPhoto"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_portrait_white_48dp"
@@ -24,24 +24,13 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/imageView"
+        android:id="@+id/viewGroupTypeImage"
+        android:layout_below="@+id/viewGroupEventButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:src="@drawable/ic_description_white_48dp"
         android:tint="@android:color/holo_red_dark"
         android:layout_margin="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="This is where the lengthy description of this group goes. \n\nGo Huskies."
-        android:id="@+id/textView4"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="119dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -49,28 +38,52 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:id="@+id/linearLayout2">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Blogs"
             android:id="@+id/viewGroupBlogButton"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Members"
             android:id="@+id/viewGroupMemberButton"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
-    <CalendarView
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Events and Calendar"
+        android:id="@+id/viewGroupEventButton"
+        android:layout_below="@+id/viewGroupPhoto"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff" />
+
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/viewGroupScrollView"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:fillViewport="false" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="This is where the description of a group will go. \n\nThis description is within a scrollView because it can potentially be very long. \n\nScroll down to see more text. \n\n\nThis is a very low line. \nThis is an even lower line. \nAnd this is the lowest line of them all."
+            android:id="@+id/viewGroupLengthyText" />
+    </ScrollView>
 
 </RelativeLayout>
