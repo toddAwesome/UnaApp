@@ -11,7 +11,7 @@ public class TheColorUtil {
      * @return the preferred color that buttons and stuff should be.
      */
     public static int getProperColor() {
-        return 0xff4444; //Una_Red
+        return 0xFFff4444; //Una_Red
     }
 
     /**
