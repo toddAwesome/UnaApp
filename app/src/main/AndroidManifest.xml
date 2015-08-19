@@ -65,6 +65,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
         </activity>
+        <activity
+            android:name=".BlogListActivity"
+            android:label="@string/title_activity_blog_list"
+            android:parentActivityName=".ViewGroupActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
+        </activity>
     </application>
 
 </manifest>

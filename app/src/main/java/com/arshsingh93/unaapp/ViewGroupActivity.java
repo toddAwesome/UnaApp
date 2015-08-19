@@ -123,6 +123,9 @@ public class ViewGroupActivity extends AppCompatActivity {
     //TODO onClick for the Blog button should open up a screen which has a list of blogs, buttons to create/load blogs. Locked blogs at top.
 
 
+
+
+
     //TODO onClick for the events and calendar which opens up a screen with a calendar, option to add event.
 
 

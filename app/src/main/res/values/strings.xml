@@ -23,5 +23,6 @@
     <string name="title_activity_create_group">createGroup</string>
     <string name="title_activity_view_group">ViewGroupActivity</string>
     <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_blog_list">BlogListActivity</string>
 
 </resources>
