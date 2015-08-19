@@ -58,7 +58,7 @@
                 android:value="com.arshsingh93.unaapp.MainActivity" />
         </activity>
         <activity
-            android:name=".EditActivity"
+            android:name=".EditGroupActivity"
             android:label="@string/title_activity_edit"
             android:parentActivityName=".ViewGroupActivity" >
             <meta-data

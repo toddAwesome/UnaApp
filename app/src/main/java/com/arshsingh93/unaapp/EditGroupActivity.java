@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -22,7 +23,6 @@ import android.widget.Toast;
 
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -41,25 +41,27 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EditGroupActivity extends AppCompatActivity {
+
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int CHOOSE_PHOTO_REQUEST = 1;
     public static final int MEDIA_TYPE_IMAGE = 4;
-    private Dialog progressDialog;
 
     @Bind(R.id.edtGroupNameText) TextView myName;
     @Bind(R.id.editGroupOneText) TextView myOneWord;
-    @Bind(R.id.editGroupPrivateButton) RadioButton myPrivateCheck;
-    @Bind(R.id.editGroupLengthyText) TextView myDescription;
+    @Bind(R.id.editGroupPrivateButton) CheckBox myPrivateCheck;
+    @Bind(R.id.editGroupLengthyText) EditText myDescription;
     @Bind(R.id.editGroupBlogCheck) CheckBox myBlogCheck;
     @Bind(R.id.editGroupCalendarCheck) CheckBox myCalendarCheck;
     @Bind(R.id.editGroupPhoto) ImageView myPhoto;
     @Bind(R.id.EditGroupButton) Button mySaveButton;
     @Bind(R.id.EditGroupMemberbutton) Button myEditMembersButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_edit);
+        setTheme(R.style.RedTheme);
+        setContentView(R.layout.activity_edit_group);
         ButterKnife.bind(this);
 
 
@@ -68,13 +70,15 @@ public class EditGroupActivity extends AppCompatActivity {
         myName.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_NAME));
         myOneWord.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_ONE_WORD));
         myDescription.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_LENGTHY_DESCRIPTION));
-        if(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_TYPE).equals(TheGroupUtil.GROUP_PRIVATE))
-            myPrivateCheck.isChecked();
-        if(TheGroupUtil.getCurrentGroup().getBoolean(TheGroupUtil.GROUP_BLOG_EXIST) == true)
-            myBlogCheck.isChecked();
-        if(TheGroupUtil.getCurrentGroup().getBoolean(TheGroupUtil.GROUP_CALENDAR_EXIST) == true)
-            myCalendarCheck.isChecked();
+        setCheckBoxes();
 
+        setPhoto();
+    }
+
+    /**
+     * Sets the photo of the group.
+     */
+    private void setPhoto() {
         if (TheGroupUtil.getCurrentGroup().get(TheGroupUtil.GROUP_PHOTO) != null) {
             ParseFile picFile = (ParseFile) TheGroupUtil.getCurrentGroup().get(TheGroupUtil.GROUP_PHOTO);
             picFile.getDataInBackground(new GetDataCallback() {
@@ -89,6 +93,27 @@ public class EditGroupActivity extends AppCompatActivity {
                 }
 
             });
+        }
+    }
+
+    /**
+     * Sets the check boxes depending on what the founder/moderator specified previously.
+     */
+    private void setCheckBoxes() {
+        if(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_TYPE).equals(TheGroupUtil.GROUP_PRIVATE)) {
+            myPrivateCheck.setChecked(true);
+        } else {
+            myPrivateCheck.setChecked(false);
+        }
+        if(TheGroupUtil.getCurrentGroup().getBoolean(TheGroupUtil.GROUP_BLOG_EXIST) == true) {
+            myBlogCheck.setChecked(true);
+        } else {
+            myBlogCheck.setChecked(false);
+        }
+        if(TheGroupUtil.getCurrentGroup().getBoolean(TheGroupUtil.GROUP_CALENDAR_EXIST) == true) {
+            myCalendarCheck.setChecked(true);
+        } else {
+            myCalendarCheck.setChecked(false);
         }
     }
 

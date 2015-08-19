@@ -78,6 +78,8 @@ public class CreateGroupActivity extends AppCompatActivity {
                     public void done(ParseException e) {
                         if (e == null) {
                             Toast.makeText(CreateGroupActivity.this, "You group has been created", Toast.LENGTH_LONG).show();
+                            //set the value of current group to this group in TheGroupUtil
+                            TheGroupUtil.setCurrentGroup(groupObject);
                             //send user to the group looker page.
                             Intent intent = new Intent(CreateGroupActivity.this, ViewGroupActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

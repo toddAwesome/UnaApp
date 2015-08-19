@@ -35,7 +35,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/viewGroupEventImage"
             android:src="@drawable/ic_event_white_48dp"
             android:tint="@android:color/holo_red_dark" />
     </LinearLayout>
@@ -108,7 +108,7 @@
             android:text="This is where the description of a group will go. \n\nThis description is within a scrollView because it can potentially be very long. \n\nScroll down to see more text. \n\n\nThis is a very low line. \nThis is an even lower line. \nAnd this is the lowest line of them all."
             android:id="@+id/viewGroupLengthyText"
             android:textSize="14dp"
-            android:gravity="center" />
+            android:gravity="center_horizontal" />
     </ScrollView>
 
     <TextView
