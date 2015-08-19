@@ -18,6 +18,7 @@ public class TheGroupUtil {
     public static String GROUP_MEMBERS = "GroupMembers";
     public static String GROUP_MODERATORS = "GroupModerators";
     public static String GROUP_SIZE = "GroupSize";
+    public static String GROUP_PHOTO = "GroupPhoto";
 
     public static String GROUP_PUBLIC = "public";
     public static String GROUP_PRIVATE = "private";

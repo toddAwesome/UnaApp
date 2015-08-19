@@ -129,6 +129,10 @@ public class CreateGroupActivity extends AppCompatActivity {
         return true; //if no problem encountered.
     }
 
+    /**
+     * Gets the type of group this is.
+     * @return private if private group, public if public group.
+     */
     private String getGroupType() {
         if (myPrivateCheck.isChecked()) {
             return TheGroupUtil.GROUP_PRIVATE;

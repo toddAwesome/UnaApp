@@ -57,6 +57,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arshsingh93.unaapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".EditActivity"
+            android:label="@string/title_activity_edit"
+            android:parentActivityName=".ViewGroupActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
+        </activity>
     </application>
 
 </manifest>

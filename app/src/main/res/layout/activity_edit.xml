@@ -1,0 +1,204 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.arshsingh93.unaapp.EditGroupActivity"
+    android:background="#ffffff">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Edit Group"
+        android:id="@+id/editGroupTopText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textColor="#cc0000"
+        android:textSize="24dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/edtGroupNameText"
+        android:maxLines="2"
+        android:layout_below="@+id/editGroupTopText"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Group Name: "
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/edtGroupNameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make this group private"
+        android:id="@+id/editGroupPrivateButton"
+        android:checked="false"
+
+        android:buttonTint="@android:color/holo_red_dark"
+        android:layout_below="@+id/edtGroupNameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Note: Groups that are set to &apos;private&apos; can not be found (or seen) in the search bar by non-members"
+        android:id="@+id/textView2"
+        android:gravity="center"
+        android:layout_below="@+id/editGroupPrivateButton"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="one word that describes this group?"
+                android:id="@+id/textView3"
+                android:layout_above="@+id/editGroupBlogCheck"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editGroupOneText" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blogs"
+        android:id="@+id/editGroupBlogCheck"
+        android:checked="true"
+        android:buttonTint="@android:color/holo_red_dark"
+        android:layout_alignTop="@+id/editGroupCalendarCheck"
+        android:layout_alignLeft="@+id/editGroupPhoto"
+        android:layout_alignStart="@+id/editGroupPhoto" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calendar"
+        android:id="@+id/editGroupCalendarCheck"
+        android:checked="true"
+        android:buttonTint="@android:color/holo_red_dark"
+        android:layout_marginTop="143dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/editGroupBlogCheck">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editGroupLengthyText"
+            android:hint="Include lengthy description of group here"
+            android:layout_alignTop="@+id/scrollView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editGroupPhoto"
+        android:minHeight="150dp"
+        android:maxWidth="150dp"
+        android:minWidth="150dp"
+        android:maxHeight="150dp"
+        android:nestedScrollingEnabled="false"
+        android:src="@drawable/ic_portrait_white_48dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_above="@+id/editGroupBlogCheck"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:tint="@android:color/holo_red_dark"
+        android:background="@android:color/holo_red_light"
+        android:baselineAlignBottom="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView"
+        android:weightSum="2">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Member"
+            android:id="@+id/EditGroupMemberbutton"
+            android:buttonTint="@android:color/holo_red_dark"
+            android:layout_alignBottom="@+id/EditGroupButton"
+            android:layout_toEndOf="@+id/editGroupPrivateButton"
+            android:layout_below="@+id/scrollView"
+            android:layout_toRightOf="@+id/editGroupPrivateButton"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Group"
+            android:id="@+id/EditGroupButton"
+            android:layout_alignParentBottom="true"
+            android:textColor="#ffffff"
+            android:layout_toLeftOf="@+id/edtGroupNameText"
+            android:layout_toStartOf="@+id/edtGroupNameText"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+</RelativeLayout>
