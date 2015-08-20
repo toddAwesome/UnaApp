@@ -4,7 +4,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 /**
- * Created by Student on 8/17/2015.
+ * Created by Arsh on 8/17/2015.
  */
 public class TheGroupUtil {
 

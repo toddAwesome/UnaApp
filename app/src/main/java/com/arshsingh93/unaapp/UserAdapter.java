@@ -15,7 +15,7 @@ import java.util.zip.Inflater;
 import butterknife.Bind;
 
 /**
- * Created by Student on 8/20/2015.
+ * Created by Arsh on 8/20/2015.
  */
 public class UserAdapter  extends ArrayAdapter<ParseObject> {
 

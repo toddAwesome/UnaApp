@@ -23,6 +23,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * created by Arsh 8/19/2015
+ */
 public class InviteActivity extends AppCompatActivity {
 
     @Bind(R.id.inviteButton)

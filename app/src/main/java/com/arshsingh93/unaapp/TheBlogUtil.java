@@ -3,7 +3,7 @@ package com.arshsingh93.unaapp;
 import com.parse.ParseObject;
 
 /**
- * Created by Student on 8/19/2015.
+ * Created by Arsh on 8/19/2015.
  */
 public class TheBlogUtil {
 

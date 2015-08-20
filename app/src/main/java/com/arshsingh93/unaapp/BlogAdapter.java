@@ -13,7 +13,7 @@ import com.parse.ParseObject;
 import java.util.ArrayList;
 
 /**
- * Created by Student on 8/19/2015.
+ * Created by Arsh on 8/19/2015.
  */
 public class BlogAdapter extends ArrayAdapter<ParseObject> {
     public static final String TAG = BlogAdapter.class.getSimpleName();

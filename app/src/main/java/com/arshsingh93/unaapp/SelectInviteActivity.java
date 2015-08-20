@@ -21,6 +21,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Arsh 8/19/2015
+ */
 public class SelectInviteActivity extends AppCompatActivity {
 
     @Bind(R.id.inviteList) ListView myList;

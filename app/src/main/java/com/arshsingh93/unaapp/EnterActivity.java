@@ -17,7 +17,9 @@ import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
 
-
+/**
+ * created by Todd 8/19/2015
+ */
 public class EnterActivity extends AppCompatActivity {
     private static final String TAG = EnterActivity.class.getSimpleName();
 

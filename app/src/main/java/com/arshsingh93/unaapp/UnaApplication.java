@@ -6,7 +6,7 @@ import com.facebook.FacebookSdk;
 import com.parse.Parse;
 
 /**
- * Created by Student on 8/17/2015.
+ * Created by Arsh & Todd on 8/17/2015.
  */
 public class UnaApplication extends Application {
 

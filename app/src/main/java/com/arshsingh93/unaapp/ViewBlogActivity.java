@@ -13,6 +13,9 @@ import com.parse.ParseUser;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Arsh & Todd 8/19/2015
+ */
 public class ViewBlogActivity extends AppCompatActivity {
 
 

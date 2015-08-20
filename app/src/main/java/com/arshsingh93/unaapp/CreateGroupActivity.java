@@ -21,6 +21,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by Arsh 8/19/2015
+ */
 public class CreateGroupActivity extends AppCompatActivity {
 
     @Bind(R.id.createGroupNameText) TextView myName;

@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 /**
- * Created by Student on 8/17/2015.
+ * Created by Arsh on 8/17/2015.
  */
 public class TheNetUtil {
 

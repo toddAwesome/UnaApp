@@ -52,7 +52,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Arsh on 8/19/2015.
+ * Created by Todd on 8/19/2015.
  */
 public class SettingsActivity extends AppCompatActivity {
 

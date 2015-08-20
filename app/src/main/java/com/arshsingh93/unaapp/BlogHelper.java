@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 /**
- * Created by Student on 8/19/2015.
+ * Created by Arsh on 8/19/2015.
  */
 public class BlogHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "una.db";
