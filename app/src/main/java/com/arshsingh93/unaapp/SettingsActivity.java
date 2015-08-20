@@ -77,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        myUsername.setText(ParseUser.getCurrentUser().getUsername());
         //   myFacebookPhoto.setVisibility(View.INVISIBLE);
         callbackManager = CallbackManager.Factory.create();
 
@@ -121,6 +122,24 @@ public class SettingsActivity extends AppCompatActivity {
 
             });
         }
+    }
+    @OnClick (R.id.settingBlueButton)
+    public void changeToBlue(View view) {
+        Log.e(this.getClass().getSimpleName(), "Clicked blue button");
+        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_BLUE);
+
+    }
+
+    @OnClick (R.id.settingGreenButton)
+    public void changeToGreen(View view) {
+        Log.e(this.getClass().getSimpleName(), "Clicked green button");
+        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_GREEN);
+    }
+
+    @OnClick (R.id.settingRedButton)
+    public void changeToRed(View view) {
+        Log.e(this.getClass().getSimpleName(), "Clicked red button");
+        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_RED);
     }
     @OnClick (R.id.settingsPhoto)
     public void choosePhoto(View v) {
@@ -179,7 +198,7 @@ public class SettingsActivity extends AppCompatActivity {
                     Toast.makeText(this, "Sorry, there was an error", Toast.LENGTH_LONG).show();
                 } else {
                     mMediaUri = data.getData();
-                    Log.d("ProfileFragment", "Here in onActivityResult's if if else.");
+                    Log.d("ProfileFragment", "Here in onActivityResult's if else.");
                     setImage(mMediaUri);
                 }
             } else {
@@ -260,22 +279,4 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
     };
-    @OnClick (R.id.settingBlueButton)
-    public void changeToBlue(View view) {
-        Log.e(this.getClass().getSimpleName(), "Clicked blue button");
-        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_BLUE);
-
-    }
-
-    @OnClick (R.id.settingGreenButton)
-    public void changeToGreen(View view) {
-        Log.e(this.getClass().getSimpleName(), "Clicked green button");
-        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_GREEN);
-    }
-
-    @OnClick (R.id.settingRedButton)
-    public void changeToRed(View view) {
-        Log.e(this.getClass().getSimpleName(), "Clicked red button");
-        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_RED);
-    }
 }

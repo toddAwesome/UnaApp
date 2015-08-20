@@ -77,7 +77,6 @@ public class EnterActivity extends AppCompatActivity {
                 }
             }
         });
-
         myForgottenView = (TextView) findViewById(R.id.forgotLabel);
 
         //create an account

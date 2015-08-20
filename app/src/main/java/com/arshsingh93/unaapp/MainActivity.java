@@ -192,8 +192,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SelectInviteActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.action_search) {
-            Toast.makeText(this, "clicked search", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

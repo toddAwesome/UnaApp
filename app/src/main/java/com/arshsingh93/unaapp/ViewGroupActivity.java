@@ -33,6 +33,7 @@ public class ViewGroupActivity extends AppCompatActivity {
     @Bind(R.id.viewGroupTypeImage) ImageView myTypeImage;
     @Bind(R.id.viewGroupPhoto) ImageView myPhoto;
     @Bind(R.id.viewAnnoucementImage) ImageView myPostAnnouncment;
+    @Bind(R.id.announcmentView) TextView post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +49,11 @@ public class ViewGroupActivity extends AppCompatActivity {
         setScreenColor();
 
         myDescription.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_LENGTHY_DESCRIPTION));
+        post.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_ANNOUNCEMENT));
         setType();
         setPhoto();
         setButtonVisibility();
-
-
-
     }
-
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -78,6 +75,7 @@ public class ViewGroupActivity extends AppCompatActivity {
         myEventButton.setColorFilter(TheColorUtil.getProperColor());
         myTypeImage.setColorFilter(TheColorUtil.getProperColor());
         myMemberButton.setColorFilter(TheColorUtil.getProperColor());
+
         myPostAnnouncment.setColorFilter(TheColorUtil.getProperColor());
     }
 
