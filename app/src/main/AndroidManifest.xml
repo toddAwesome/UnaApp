@@ -97,6 +97,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arshsingh93.unaapp.SelectBlogActivity" />
         </activity>
+        <activity
+            android:name=".SelectUserActivity"
+            android:label="@string/title_activity_select_user"
+            android:parentActivityName=".ViewGroupActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
+        </activity>
+        <activity
+            android:name=".InviteActivity"
+            android:label="@string/title_activity_invite"
+            android:parentActivityName=".ViewGroupActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
+        </activity>
+        <activity
+            android:name=".SelectInviteActivity"
+            android:label="@string/title_activity_select_invite"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@
         <item>Take Picture</item>
         <item>Choose Picture from Gallery</item>
     </string-array>
+
     <string name="title_activity_create_group">createGroup</string>
     <string name="title_activity_view_group">ViewGroupActivity</string>
     <string name="title_activity_edit">EditActivity</string>
@@ -27,5 +28,13 @@
     <string name="title_activity_view_blog">ViewBlogActivity</string>
     <string name="title_activity_write_blog">WriteBlogActivity</string>
     <string name="title_activity_saved_blogs">SavedBlogsActivity</string>
+    <string name="title_activity_select_user">SelectUserActivity</string>
+
+    <string-array name="user_choices">
+        <item>Make this member into a Moderator</item>
+        <item>Remove this member from this group</item>
+    </string-array>
+    <string name="title_activity_invite">InviteActivity</string>
+    <string name="title_activity_select_invite">SelectInviteActivity</string>
 
 </resources>

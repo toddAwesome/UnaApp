@@ -1,6 +1,7 @@
 package com.arshsingh93.unaapp;
 
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 /**
  * Created by Student on 8/17/2015.
@@ -26,11 +27,21 @@ public class TheGroupUtil {
     public static String GROUP_PUBLIC = "public";
     public static String GROUP_PRIVATE = "private";
 
+    /**
+     * Used for the user.
+     */
+    public static String MEMBERSHIP = "GroupMembership";
+
 
     /**
      * This is the current group that is being viewed or edited.
      */
     private static ParseObject currentGroup;
+
+    /**
+     * The user that the app user is viewing.
+     */
+    private static ParseUser aUser;
 
     /**
      * This sets the current group that the user is viewing.
@@ -46,5 +57,21 @@ public class TheGroupUtil {
      */
     public static ParseObject getCurrentGroup() {
         return currentGroup;
+    }
+
+    /**
+     * Sets the user being viewed.
+     * @param theUser a user.
+     */
+    public static void setAUser(ParseUser theUser) {
+        aUser = theUser;
+    }
+
+    /**
+     * Gets the viewed user.
+     * @return a ParseUser.
+     */
+    public static ParseUser getAUser() {
+        return aUser;
     }
 }

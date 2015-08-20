@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.arshsingh93.unaapp.ViewGroupActivity">
 
+    <item android:id="@+id/action_leave_group"
+        android:title="Leave group"
+        android:orderInCategory="101"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_invite"
+        android:title="Invite someone"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 
     <item android:id="@+id/action_edit_group"
         android:title="@string/action_edit_group"

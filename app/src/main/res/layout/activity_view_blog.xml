@@ -64,14 +64,6 @@
                     android:layout_width="20px"
                     android:layout_height="20px" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="August 32, 2015"
-                    android:id="@+id/viewBlogDate"
-                    android:gravity="center_horizontal" />
-
             </LinearLayout>
 
             <Space

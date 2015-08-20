@@ -3,9 +3,13 @@ package com.arshsingh93.unaapp;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -15,6 +19,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -23,9 +28,12 @@ import butterknife.ButterKnife;
 /**
  * This is the activity that shows the list of all blogs associated with the group.
  */
-public class SelectBlogActivity extends ListActivity {
+public class SelectBlogActivity extends AppCompatActivity {
+
+    private static String TAG = "SelectBlog";
 
     @Bind(R.id.blogListProgressBar) ProgressBar myBar;
+    @Bind(R.id.bloglist) ListView myList;
 
     protected ParseObject[] myBlogs;
 
@@ -37,9 +45,10 @@ public class SelectBlogActivity extends ListActivity {
         setContentView(R.layout.activity_select_blog);
         ButterKnife.bind(this);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         myBar.setVisibility(View.INVISIBLE);
 
-        //TODO if internet available {
         getAllBlogs();
 
 
@@ -63,11 +72,20 @@ public class SelectBlogActivity extends ListActivity {
                     }
 
                     BlogAdapter adapter = new BlogAdapter(SelectBlogActivity.this, myBlogs);
-                    setListAdapter(adapter);
+                    myList.setAdapter(adapter);
+                    myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            TheBlogUtil.setCurrentBlog(myBlogs[position]);
+                            Intent intent = new Intent(SelectBlogActivity.this, ViewBlogActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
 
                 } else {
                     /// Something went wrong.
-                    Toast.makeText(SelectBlogActivity.this, "Sorry, there was an error getting users!",
+                    Toast.makeText(SelectBlogActivity.this, "Sorry, there was an error getting blogs!",
                             Toast.LENGTH_LONG).show();
 
                 }
@@ -75,23 +93,36 @@ public class SelectBlogActivity extends ListActivity {
 
             @Override
             public void done(Object o, Throwable throwable) {
-
-            }
-
-    });
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Blog");
-        query.whereEqualTo(TheGroupUtil.GROUP_ID, TheGroupUtil.getCurrentGroup().getObjectId());
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
                 myBar.setVisibility(View.INVISIBLE);
-                if (e == null) {
-                    myBlogs = list.toArray(new ParseObject[0]);
-                } else {
 
+                if (throwable == null) {
+                    ArrayList<ParseObject> arrayList = (ArrayList) o;
+                    //Log.e(TAG, "in second done. size of o: " + arrayList.size());
+
+                    //Log.e(TAG, "in done() of query of getAllGroups. size of list: " + arrayList.size());
+
+                    myBlogs = new ParseObject[arrayList.size()];
+                    for (int i = 0; i < arrayList.size(); i++) {
+                        myBlogs[i] = (ParseObject) arrayList.get(i);
+                    }
+                    //Log.e(TAG, "in done() of query of getAllGroups. Value at last position: "
+                    //        + myBlogs[arrayList.size() - 1].getString(TheGroupUtil.GROUP_NAME));
+
+                    BlogAdapter adapter = new BlogAdapter(SelectBlogActivity.this, myBlogs);
+                    myList.setAdapter(adapter);
+                    //myList.setEmptyView(myEmptyText);
+                    //setOnclickListener to myList
+                    myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            TheBlogUtil.setCurrentBlog(myBlogs[position]);
+                            Intent intent = new Intent(SelectBlogActivity.this, ViewBlogActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
+
         });
 
     }
@@ -117,6 +148,7 @@ public class SelectBlogActivity extends ListActivity {
 
         //create a new blog
         if (id == R.id.action_new_blog) {
+            TheBlogUtil.setCurrentBlog(null);
             Intent intent = new Intent(this, WriteBlogActivity.class);
             startActivity(intent);
         }
@@ -126,10 +158,6 @@ public class SelectBlogActivity extends ListActivity {
             Intent intent = new Intent(this, SavedBlogsActivity.class);
             startActivity(intent);
         }
-
-        //TODO add a button for loading a blog
-
-        //todo add a button for finding a blog (search for a word that is in the blog title).
 
         return super.onOptionsItemSelected(item);
     }

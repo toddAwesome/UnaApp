@@ -38,11 +38,12 @@ public class WriteBlogActivity extends AppCompatActivity {
 
         myBlogHelper = new BlogHelper(this);
 
+        if (TheBlogUtil.getCurrentBlog() != null) {
+            myTitle.setText(TheBlogUtil.getCurrentBlog().getString(TheBlogUtil.BLOG_TITLE).toString());
+            myBody.setText(TheBlogUtil.getCurrentBlog().getString(TheBlogUtil.BLOG_BODY).toString());
+        }
 
     }
-
-
-
 
 
 
@@ -62,7 +63,7 @@ public class WriteBlogActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_publish) {
             final String titleText = myTitle.getText().toString();
             final String bodyText = myBody.getText().toString();
@@ -99,7 +100,8 @@ public class WriteBlogActivity extends AppCompatActivity {
                                             public void done(ParseException e) {
                                                 if (e == null) {
                                                     Intent intent = new Intent(WriteBlogActivity.this, ViewGroupActivity.class);
-                                                    //TODO make sure the user can not get back to this screen.
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     startActivity(intent);
                                                 }
                                             }
@@ -154,6 +156,8 @@ public class WriteBlogActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(WriteBlogActivity.this, SelectBlogActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
                         });

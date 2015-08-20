@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +40,10 @@ public class ViewGroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_group);
         ButterKnife.bind(this);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        getSupportActionBar().setTitle(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_NAME));
+
         setScreenColor();
 
         myDescription.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_LENGTHY_DESCRIPTION));
@@ -44,6 +52,21 @@ public class ViewGroupActivity extends AppCompatActivity {
         setButtonVisibility();
 
 
+
+    }
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_HOME)) {
+            finish();
+            Toast.makeText(this, "You pressed the home button!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ViewGroupActivity.this, MainActivity.class);
+            startActivity(intent);
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**
@@ -86,7 +109,7 @@ public class ViewGroupActivity extends AppCompatActivity {
                         myPhoto.setImageBitmap(bitmap);
                         myPhoto.setBackgroundColor(0xFFffffff);
                     } else {
-                        //unable to load image. //TODO
+                        //unable to load image.
                     }
                 }
 
@@ -129,11 +152,16 @@ public class ViewGroupActivity extends AppCompatActivity {
 
 
 
+    @OnClick (R.id.viewGroupMemberImage)
+    public void seeUsers() {
+         Intent intent = new Intent(this, SelectUserActivity.class);
+         startActivity(intent);
+    }
+
+
 
     //TODO onClick for the events and calendar which opens up a screen with a calendar, option to add event.
 
-
-    //TODO onClick for members button which displays a list of members and also says if those members are founder/moderator
 
 
 
@@ -151,9 +179,59 @@ public class ViewGroupActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_invite) {
+            ParseRelation relation = TheGroupUtil.getCurrentGroup().getRelation(TheGroupUtil.GROUP_MEMBERS);
+            int i = -1;
+            try {
+                i = relation.getQuery().whereEqualTo("objectId", ParseUser.getCurrentUser().getObjectId()).count();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (i == 1) {
+                Intent intent = new Intent(ViewGroupActivity.this, InviteActivity.class);
+                startActivity(intent);
+
+            }
+        }
+
         if (id == R.id.action_edit_group) {
-            Intent intent = new Intent(this, EditGroupActivity.class); //TODO uncomment after adding EditActivity.
-            startActivity(intent);
+            ParseRelation relation = TheGroupUtil.getCurrentGroup().getRelation(TheGroupUtil.GROUP_MEMBERS);
+            int i = -1;
+            try {
+                i = relation.getQuery().whereEqualTo("objectId", ParseUser.getCurrentUser().getObjectId()).count();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (i == 1) {
+                Intent intent = new Intent(this, EditGroupActivity.class);
+                startActivity(intent);
+            }
+        }
+
+        if (id == R.id.action_leave_group) {
+            ParseRelation relation = TheGroupUtil.getCurrentGroup().getRelation(TheGroupUtil.GROUP_MEMBERS);
+            int i = -1;
+            try {
+                i = relation.getQuery().whereEqualTo("objectId", ParseUser.getCurrentUser().getObjectId()).count();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (i == 1) {
+                ParseRelation members = TheGroupUtil.getCurrentGroup().getRelation(TheGroupUtil.GROUP_MEMBERS);
+                members.remove(ParseUser.getCurrentUser());
+                //TheGroupUtil.getCurrentGroup().get(TheGroupUtil.GROUP_SIZE).decrementSize()?
+                TheGroupUtil.getCurrentGroup().saveInBackground();
+
+                ParseRelation relation2 = ParseUser.getCurrentUser().getRelation(TheGroupUtil.MEMBERSHIP);
+                relation2.remove(TheGroupUtil.getCurrentGroup());
+                ParseUser.getCurrentUser().saveInBackground();
+
+                Intent intent = new Intent(ViewGroupActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
         }
 
         return super.onOptionsItemSelected(item);

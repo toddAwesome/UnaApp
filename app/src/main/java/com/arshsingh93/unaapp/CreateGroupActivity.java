@@ -71,8 +71,6 @@ public class CreateGroupActivity extends AppCompatActivity {
 
             groupObject.put(TheGroupUtil.GROUP_SIZE, 1); //the first member is the founder.
 
-            //ParseRelation blogRelation = TheGroupUtil.getCurrentGroup().getRelation(TheGroupUtil.GROUP_BLOG); //empty at first, no need to do anything with this in this class.
-
 
             if (TheNetUtil.isNetworkAvailable(this)) {
                 Toast.makeText(this, "network is available", Toast.LENGTH_SHORT).show();
@@ -81,8 +79,15 @@ public class CreateGroupActivity extends AppCompatActivity {
                     public void done(ParseException e) {
                         if (e == null) {
                             Toast.makeText(CreateGroupActivity.this, "You group has been created", Toast.LENGTH_LONG).show();
+
+                            //add this group to the list of groups the user is a member of.
+                            ParseRelation groupRelationship = ParseUser.getCurrentUser().getRelation(TheGroupUtil.MEMBERSHIP);
+                            groupRelationship.add(groupObject);
+                            ParseUser.getCurrentUser().saveInBackground();
+
                             //set the value of current group to this group in TheGroupUtil
                             TheGroupUtil.setCurrentGroup(groupObject);
+
                             //send user to the group looker page.
                             Intent intent = new Intent(CreateGroupActivity.this, ViewGroupActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

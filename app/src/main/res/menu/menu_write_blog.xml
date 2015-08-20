@@ -2,18 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.arshsingh93.unaapp.WriteBlogActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
 
 
     <item android:id="@+id/action_publish"
-        android:icon="@drawable/ic_add_box_white_48dp"
-        android:title="@string/action_new"
+        android:icon="@drawable/ic_publish_white_48dp"
+        android:title="Publish this blog"
         app:showAsAction="always" />
 
     <item android:id="@+id/action_save"
-        android:icon="@drawable/ic_add_box_white_48dp"
-        android:title="@string/action_new"
+        android:icon="@drawable/ic_sd_storage_white_48dp"
+        android:title="Save this blog"
         app:showAsAction="always" />
 
 

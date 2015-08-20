@@ -106,50 +106,58 @@ public class EnterActivity extends AppCompatActivity {
             }
         });
     }
-            public void logIn(int type) {
-                String username = myUsername.getText().toString();
-                String password = myPassword.getText().toString();
 
-                username = username.trim().toLowerCase();
-                password = password.trim();
-
-                if (username.isEmpty() || password.isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EnterActivity.this);
-                    builder.setMessage(R.string.login_error_message)
-                            .setTitle(R.string.login_error_title)
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                } else {
-                    //login
-                    //toggleRefresh();
-                    ParseUser.logInInBackground(username, password, new LogInCallback() {
-                        @Override
-                        public void done(ParseUser parseUser, ParseException e) {
-                        //    toggleRefresh();
-                            if (e == null) {
-                                //success
-                                Intent intent = new Intent(EnterActivity.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(EnterActivity.this);
-                                builder.setMessage(e.getMessage())
-                                        .setTitle(R.string.login_error_title)
-                                        .setPositiveButton(android.R.string.ok, null);
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }
-                        }
-                    });
-                }
-
-            }
-    /*
-    stuff
+    /**
+     * This method logs the user in.
+     * @param type a value to determine if this option should be taken.
      */
+    public void logIn(int type) {
+        String username = myUsername.getText().toString();
+        String password = myPassword.getText().toString();
+
+        username = username.trim().toLowerCase();
+        password = password.trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(EnterActivity.this);
+            builder.setMessage(R.string.login_error_message)
+                    .setTitle(R.string.login_error_title)
+                    .setPositiveButton(android.R.string.ok, null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            //login
+            //toggleRefresh();
+            ParseUser.logInInBackground(username, password, new LogInCallback() {
+                @Override
+                public void done(ParseUser parseUser, ParseException e) {
+                //    toggleRefresh();
+                    if (e == null) {
+                        //success
+                        Intent intent = new Intent(EnterActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(EnterActivity.this);
+                        builder.setMessage(e.getMessage())
+                                .setTitle(R.string.login_error_title)
+                                .setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     *This is the method for logging in.
+     *
+     *@param type a value to determine if this option should be taken.
+     **/
     public void signUp(int type){
         String originalUsername = myUsername.getText().toString().trim();
         String password = myPassword.getText().toString();
@@ -172,6 +180,7 @@ public class EnterActivity extends AppCompatActivity {
             newUser.setPassword(password);
             newUser.setEmail(email);
             newUser.put("origName", originalUsername); //keep the original username intact for display
+
 
             newUser.signUpInBackground(new SignUpCallback() {
                 @Override
