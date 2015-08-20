@@ -6,13 +6,45 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.ParseObject;
+
 public class SavedBlogsActivity extends ListActivity {
+
+    protected ParseObject[] myBlogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.RedTheme);
         setContentView(R.layout.activity_saved_blogs);
+
+        getAllBlogs();
+
     }
+
+    /**
+     * Gets the blogs that are saved to the device.
+     */
+    private void getAllBlogs() {
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

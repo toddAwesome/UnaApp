@@ -123,6 +123,8 @@ public class SelectBlogActivity extends ListActivity {
 
         if (id == R.id.action_load_blog) {
             //load a list of blogs.
+            Intent intent = new Intent(this, SavedBlogsActivity.class);
+            startActivity(intent);
         }
 
         //TODO add a button for loading a blog
