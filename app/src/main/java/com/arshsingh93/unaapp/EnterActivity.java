@@ -39,7 +39,6 @@ public class EnterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.RedTheme);
         setContentView(R.layout.activity_enter);
 
 

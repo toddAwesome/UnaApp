@@ -41,7 +41,7 @@ public class SelectBlogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_select_blog);
         ButterKnife.bind(this);
 

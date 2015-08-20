@@ -36,11 +36,11 @@ public class CreateGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_create_group);
         ButterKnife.bind(this);
 
-        myCreateButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
+        myCreateButton.setBackgroundColor(TheColorUtil.getProperColor());
     }
 
 

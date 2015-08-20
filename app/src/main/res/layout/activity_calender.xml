@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+    <RelativeLayout tools:context="com.arshsingh93.unaapp.CalenderActivity"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Previous"
+        android:id="@+id/prev_button"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Next" android:id="@+id/next_button"
+        android:layout_alignParentRight="true"/>
+
+    <com.arshsingh93.unaapp.CompactCalendarView
+        android:layout_height="250dp"
+        android:layout_width="fill_parent"
+        android:id="@+id/compactcalendar_view"
+        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarFirstDayOfMonthBackgroundColor="#E57373"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarBackgroundColor="#ffe95451"
+        app:compactCalendarTextSize="12sp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_below="@+id/prev_button"/>
+
+    <!--<Button-->
+
+
+    <!--style="?android:attr/buttonStyleSmall"-->
+
+
+    <!--android:layout_width="wrap_content"-->
+
+
+    <!--android:layout_height="wrap_content"-->
+
+
+    <!--android:text="Create Event"-->
+
+
+    <!--android:id="@+id/addbutton"-->
+
+
+    <!--android:layout_alignParentTop="true"-->
+
+
+    <!--android:layout_centerHorizontal="true" />-->
+
+
+    <ListView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/bookings_listview"
+        android:layout_below="@+id/compactcalendar_view">
+    </ListView>
+
+</RelativeLayout>

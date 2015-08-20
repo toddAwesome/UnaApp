@@ -1,14 +1,46 @@
-<resources>
+<?xml version="1.0"?>
+
+    <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
 
-    <style name="RedTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#ffff4444</item>
 
-        <!--<item name="android:background">#28ff6c6e</item> -->
-    </style>
+
+    -<style parent="Theme.AppCompat.Light.DarkActionBar" name="AppTheme">
+
+    <!-- Customize your theme here. -->
+
+
+</style>
+
+
+    -<style parent="Theme.AppCompat.Light.DarkActionBar" name="RedTheme">
+
+    <item name="colorPrimary">#ffff4444</item>
+
+    <!--<item name="android:background">#28ff6c6e</item> -->
+
+
+</style>
+
+
+    -<style parent="Theme.AppCompat.Light.DarkActionBar" name="BlueTheme">
+
+    <item name="colorPrimary">#ff00aac3</item>
+
+    <!--<item name="android:background">#3287ceeb</item> -->
+
+
+</style>
+
+
+    -<style parent="Theme.AppCompat.Light.DarkActionBar" name="GreenTheme">
+
+    <item name="colorPrimary">#ff56c367</item>
+
+    <!--<item name="android:background">#2855ff95</item> -->
+
+
+</style>
 
 </resources>

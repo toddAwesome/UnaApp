@@ -60,15 +60,15 @@ public class EditGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_edit_group);
         ButterKnife.bind(this);
 
         myProgressBar.setVisibility(View.INVISIBLE);
 
 
-        mySaveButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
-        myEditMembersButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
+        mySaveButton.setBackgroundColor(TheColorUtil.getProperColor());
+        myEditMembersButton.setBackgroundColor(TheColorUtil.getProperColor());
         myName.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_NAME));
         myOneWord.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_ONE_WORD));
         myDescription.setText(TheGroupUtil.getCurrentGroup().getString(TheGroupUtil.GROUP_LENGTHY_DESCRIPTION));

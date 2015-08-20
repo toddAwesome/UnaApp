@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
+        TheColorUtil.loadColorTheme(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 

@@ -27,7 +27,7 @@ public class SavedBlogsActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_saved_blogs);
 
         myBlogHelper = new BlogHelper(this);

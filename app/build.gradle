@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.arshsingh93.unaapp"
@@ -27,4 +27,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.squareup.okhttp:okhttp:2.1.0'
     compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
+    compile 'com.github.bumptech.glide:glide:3.6.0'
 }

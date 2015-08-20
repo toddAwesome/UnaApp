@@ -32,11 +32,12 @@ public class ViewGroupActivity extends AppCompatActivity {
     @Bind(R.id.viewGroupLengthyText) TextView myDescription;
     @Bind(R.id.viewGroupTypeImage) ImageView myTypeImage;
     @Bind(R.id.viewGroupPhoto) ImageView myPhoto;
+    @Bind(R.id.viewAnnoucementImage) ImageView myPostAnnouncment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_view_group);
         ButterKnife.bind(this);
 
@@ -77,6 +78,7 @@ public class ViewGroupActivity extends AppCompatActivity {
         myEventButton.setColorFilter(TheColorUtil.getProperColor());
         myTypeImage.setColorFilter(TheColorUtil.getProperColor());
         myMemberButton.setColorFilter(TheColorUtil.getProperColor());
+        myPostAnnouncment.setColorFilter(TheColorUtil.getProperColor());
     }
 
     /**
@@ -158,13 +160,16 @@ public class ViewGroupActivity extends AppCompatActivity {
          startActivity(intent);
     }
 
-
-
-    //TODO onClick for the events and calendar which opens up a screen with a calendar, option to add event.
-
-
-
-
+    @OnClick (R.id.viewGroupEventImage)
+    public void Event(){
+        Intent intent = new Intent(this, CalenderActivity.class);
+        startActivity(intent);
+    }
+    @OnClick (R.id.viewAnnoucementImage)
+    public void post() {
+        Intent intent = new Intent(this, announcementActivity.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

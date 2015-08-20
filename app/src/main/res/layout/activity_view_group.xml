@@ -1,122 +1,72 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.arshsingh93.unaapp.ViewGroupActivity"
-    android:background="#ffffff">
+<?xml version="1.0"?>
+
+    <RelativeLayout android:background="#ffffff" tools:context="com.arshsingh93.unaapp.ViewGroupActivity" android:paddingBottom="@dimen/activity_vertical_margin" android:paddingTop="@dimen/activity_vertical_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:paddingLeft="@dimen/activity_horizontal_margin" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView android:background="@android:color/darker_gray" android:layout_height="wrap_content" android:layout_width="fill_parent" android:minHeight="160dp" android:maxHeight="160dp" android:src="@drawable/ic_portrait_white_48dp" android:layout_centerHorizontal="true" android:layout_alignParentTop="true" android:id="@+id/viewGroupPhoto"/>
 
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewGroupPhoto"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_portrait_white_48dp"
-        android:maxHeight="160dp"
-        android:minHeight="160dp"
-        android:background="@android:color/holo_red_light" />
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_centerHorizontal="true" android:id="@+id/viewGroupUpperLayout" android:weightSum="2" android:layout_marginTop="5dp" android:gravity="center" android:layout_below="@+id/viewGroupPhoto" android:orientation="horizontal">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/viewGroupPhoto"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/viewGroupUpperLayout"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ic_event_white_48dp" android:id="@+id/viewGroupEventImage" android:layout_weight="1" android:tint="@android:color/holo_red_dark"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewGroupEventImage"
-            android:src="@drawable/ic_event_white_48dp"
-            android:tint="@android:color/holo_red_dark" />
-    </LinearLayout>
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ic_thumb_up_black_24dp" android:id="@+id/viewAnnoucementImage" android:layout_weight="1"
+        android:tint="@android:color/holo_red_dark" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:weightSum="3"
-        android:id="@+id/viewGroupBottomLayout">
+</LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewGroupBlogImage"
-            android:src="@drawable/ic_insert_comment_white_48dp"
-            android:tint="@android:color/holo_red_dark"
-            android:layout_weight="1" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewGroupTypeImage"
-            android:src="@drawable/ic_description_white_48dp"
-            android:tint="@android:color/holo_red_dark"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1" />
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_centerHorizontal="true" android:id="@+id/viewGroupBottomLayout" android:weightSum="3" android:orientation="horizontal" android:layout_alignParentBottom="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewGroupMemberImage"
-            android:src="@drawable/ic_people_white_48dp"
-            android:tint="@android:color/holo_red_dark"
-            android:layout_weight="1" />
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ic_insert_comment_white_48dp" android:id="@+id/viewGroupBlogImage" android:layout_weight="1" android:tint="@android:color/holo_red_dark"/>
 
-    </LinearLayout>
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ic_description_white_48dp" android:id="@+id/viewGroupTypeImage" android:layout_weight="1" android:tint="@android:color/holo_red_dark" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:layout_centerVertical="true"/>
 
-    <TextView
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ic_people_white_48dp" android:id="@+id/viewGroupMemberImage" android:layout_weight="1" android:tint="@android:color/holo_red_dark"/>
+
+</LinearLayout>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:id="@+id/viewGroupInfoText" android:layout_marginTop="15dp" android:layout_below="@+id/viewGroupUpperLayout" android:textSize="16dp" android:textStyle="bold" android:text=" ----------------- INFO -----------------"/>
+
+
+    -<ScrollView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:id="@+id/viewGroupScrollView"
+    android:layout_marginTop="5dp"
+    android:layout_below="@+id/viewGroupInfoText"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:fillViewport="false"
+    android:layout_above="@+id/viewGroupLowerLine"
+    android:layout_alignParentRight="true">
+
+    <TextView android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" -----------------   INFO    -----------------"
-        android:id="@+id/viewGroupInfoText"
+        android:id="@+id/viewGroupLengthyText"
+        android:gravity="center_horizontal"
+        android:textSize="14dp"
+        android:text="This is where the description of a group will go.
+        \n\nThis description is within a scrollView because it can potentially be very long.
+        \n\nScroll down to see more text. \n\n\nThis is a very low line.
+        \nThis is an even lower line. \nAnd this is the lowest line of them all."
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+</ScrollView>
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:textSize="16dp"
-        android:layout_below="@+id/viewGroupUpperLayout" />
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewGroupScrollView"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/viewGroupInfoText"
-        android:layout_above="@+id/viewGroupLowerLine"
-        android:fillViewport="false"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:foregroundGravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="This is where the description of a group will go. \n\nThis description is within a scrollView because it can potentially be very long. \n\nScroll down to see more text. \n\n\nThis is a very low line. \nThis is an even lower line. \nAnd this is the lowest line of them all."
-            android:id="@+id/viewGroupLengthyText"
-            android:textSize="14dp"
-            android:gravity="center_horizontal" />
-    </ScrollView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/viewGroupLowerLine"
-        android:layout_above="@+id/viewGroupBottomLayout"
+        android:textSize="16dp"
+        android:layout_above="@+id/viewGroupBottomLayout"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
-        android:textSize="16dp" />
+        android:id="@+id/announcmentView"
+        android:layout_below="@+id/viewGroupUpperLayout"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_alignBottom="@+id/viewGroupInfoText"/>
 
 </RelativeLayout>

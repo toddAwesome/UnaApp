@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/groupListImage"
             android:src="@drawable/ic_people_white_48dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@android:color/darker_gray"
             android:layout_gravity="center_horizontal" />
 
         <TextView

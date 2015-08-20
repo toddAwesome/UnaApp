@@ -25,7 +25,7 @@ public class ViewBlogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_blog);
         ButterKnife.bind(this);
-
+        TheColorUtil.onActivityCreateSetTheme(this);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         myTitle.setText(TheBlogUtil.getCurrentBlog().getString(TheBlogUtil.BLOG_TITLE));

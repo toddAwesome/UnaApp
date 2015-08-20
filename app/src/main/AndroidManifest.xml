@@ -113,6 +113,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
         </activity>
+
+    <activity
+        android:name=".CalenderActivity"
+        android:label="@string/title_activity_calender">
+    </activity>
+
+    <activity
+        android:name=".announcementActivity"
+        android:label="@string/title_activity_announcement">
+    </activity>
+
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/app_id"/>
+
+    <activity
+        android:name="com.facebook.FacebookActivity"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
         <activity
             android:name=".SelectInviteActivity"
             android:label="@string/title_activity_select_invite"

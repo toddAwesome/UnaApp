@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:textColor="#cc0000"
+        android:textColor="#ff1b1d1b"
         android:textSize="24dp" />
 
     <EditText
@@ -47,7 +47,7 @@
         android:id="@+id/editGroupPrivateButton"
         android:checked="false"
 
-        android:buttonTint="@android:color/holo_red_dark"
+        android:buttonTint="@android:color/black"
         android:layout_below="@+id/edtGroupNameText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -110,7 +110,7 @@
         android:text="Blogs"
         android:id="@+id/editGroupBlogCheck"
         android:checked="true"
-        android:buttonTint="@android:color/holo_red_dark"
+        android:buttonTint="@android:color/black"
         android:layout_alignTop="@+id/editGroupCalendarCheck"
         android:layout_alignLeft="@+id/editGroupPhoto"
         android:layout_alignStart="@+id/editGroupPhoto" />
@@ -121,7 +121,7 @@
         android:text="Calendar"
         android:id="@+id/editGroupCalendarCheck"
         android:checked="true"
-        android:buttonTint="@android:color/holo_red_dark"
+        android:buttonTint="@android:color/black"
         android:layout_marginTop="143dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignRight="@+id/scrollView"
@@ -161,7 +161,7 @@
         android:layout_above="@+id/editGroupBlogCheck"
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
-        android:background="@android:color/holo_red_light"
+        android:background="@android:color/darker_gray"
         android:baselineAlignBottom="true" />
 
     <LinearLayout

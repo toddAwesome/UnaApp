@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:textColor="#cc0000"
+        android:textColor="#ff000000"
         android:textSize="16dp" />
 
     <EditText
@@ -60,7 +60,7 @@
         android:layout_below="@+id/createGroupNameText"
 
         android:layout_centerHorizontal="true"
-        android:buttonTint="@android:color/holo_red_dark" />
+        android:buttonTint="@android:color/black" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
         android:layout_below="@+id/linearLayout"
         android:layout_toLeftOf="@+id/createGroupNameText"
         android:layout_toStartOf="@+id/createGroupNameText"
-        android:buttonTint="@android:color/holo_red_dark" />
+        android:buttonTint="@android:color/black" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
         android:layout_alignTop="@+id/createGroupBlogCheck"
         android:layout_alignRight="@+id/createGroupPrivateButton"
         android:layout_alignEnd="@+id/createGroupPrivateButton"
-        android:buttonTint="@android:color/holo_red_dark" />
+        android:buttonTint="@android:color/black" />
 
     <ScrollView
         android:layout_width="match_parent"

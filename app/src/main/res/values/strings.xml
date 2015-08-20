@@ -14,8 +14,6 @@
     <string name="login_error_message">Please make sure you enter a username and password!</string>
     <string name="login_error_title">Oops!</string>
 
-    <string name="hello_world">Hello world!</string>
-
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Choose Picture from Gallery</item>
@@ -29,7 +27,9 @@
     <string name="title_activity_write_blog">WriteBlogActivity</string>
     <string name="title_activity_saved_blogs">SavedBlogsActivity</string>
     <string name="title_activity_select_user">SelectUserActivity</string>
-
+    <string name="title_activity_calender">CalenderActivity</string>
+    <string name="app_id">1662024020676437</string>
+    <string name="title_activity_announcement">announcementActivity</string>
     <string-array name="user_choices">
         <item>Make this member into a Moderator</item>
         <item>Remove this member from this group</item>

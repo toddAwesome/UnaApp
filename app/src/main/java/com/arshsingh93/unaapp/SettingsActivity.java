@@ -1,6 +1,8 @@
 package com.arshsingh93.unaapp;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,12 +16,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.parse.GetDataCallback;
+import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -27,33 +40,73 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by Arsh on 8/19/2015.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int CHOOSE_PHOTO_REQUEST = 1;
     public static final int MEDIA_TYPE_IMAGE = 4;
+    private LoginButton faceButton;
+    private Dialog progressDialog;
+    private CallbackManager callbackManager;
 
+    @Bind(R.id.settingBlueButton) Button myBlueButton;
+    @Bind(R.id.settingGreenButton) Button myGreenButton;
+    @Bind(R.id.settingRedButton) Button myRedButton;
     @Bind(R.id.settingsPhoto) ImageView myPhoto;
     @Bind(R.id.settingsUsername) TextView myUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.RedTheme);
+        //  setTheme(R.style.RedTheme);
+        TheColorUtil.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        //   myFacebookPhoto.setVisibility(View.INVISIBLE);
+        callbackManager = CallbackManager.Factory.create();
 
-        myUsername.setText(ParseUser.getCurrentUser().getUsername());
+        //Content Sharing facebook image
+        faceButton = (LoginButton) findViewById(R.id.login_button);
+        faceButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Profile profile = Profile.getCurrentProfile();
 
+                String userId = loginResult.getAccessToken().getUserId();
+                String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+                Uri uri = Uri.parse(profileImgUrl);
+                mMediaUri = uri;
+                Glide.with(SettingsActivity.this).load(profileImgUrl).into(myPhoto);
+
+            }
+
+            @Override
+            public void onCancel() {
+                //they cancelled
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                e.printStackTrace();
+                //the attempt failed
+            }
+        });
         if (ParseUser.getCurrentUser().get("profilePic") != null) {
             ParseFile picFile = (ParseFile) ParseUser.getCurrentUser().get("profilePic");
             picFile.getDataInBackground(new GetDataCallback() {
@@ -63,14 +116,12 @@ public class SettingsActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                         myPhoto.setImageBitmap(bitmap);
                     } else {
-                        //unable to load image. //TODO
                     }
                 }
 
             });
         }
     }
-
     @OnClick (R.id.settingsPhoto)
     public void choosePhoto(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -86,7 +137,6 @@ public class SettingsActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
 
     /**
      * Set the profile image of this account
@@ -121,6 +171,7 @@ public class SettingsActivity extends AppCompatActivity {
         Log.d("ProfileFragment", "Here in onActivityResult with requestCode: " + requestCode + " , resultCode: " +
                 resultCode  + " , data: " + data);
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == this.RESULT_OK) {
             if (requestCode == CHOOSE_PHOTO_REQUEST) {
@@ -143,10 +194,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         }
     }
-
-
-
-
     protected Uri mMediaUri;
     protected DialogInterface.OnClickListener mDialogInterface = new DialogInterface.OnClickListener() {
         @Override
@@ -213,4 +260,22 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
     };
+    @OnClick (R.id.settingBlueButton)
+    public void changeToBlue(View view) {
+        Log.e(this.getClass().getSimpleName(), "Clicked blue button");
+        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_BLUE);
+
+    }
+
+    @OnClick (R.id.settingGreenButton)
+    public void changeToGreen(View view) {
+        Log.e(this.getClass().getSimpleName(), "Clicked green button");
+        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_GREEN);
+    }
+
+    @OnClick (R.id.settingRedButton)
+    public void changeToRed(View view) {
+        Log.e(this.getClass().getSimpleName(), "Clicked red button");
+        TheColorUtil.changeToTheme(this, TheColorUtil.THEME_RED);
+    }
 }
