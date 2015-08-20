@@ -24,5 +24,8 @@
     <string name="title_activity_view_group">ViewGroupActivity</string>
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_blog_list">BlogListActivity</string>
+    <string name="title_activity_view_blog">ViewBlogActivity</string>
+    <string name="title_activity_write_blog">WriteBlogActivity</string>
+    <string name="title_activity_saved_blogs">SavedBlogsActivity</string>
 
 </resources>

@@ -66,12 +66,36 @@
                 android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
         </activity>
         <activity
-            android:name=".BlogListActivity"
+            android:name=".SelectBlogActivity"
             android:label="@string/title_activity_blog_list"
             android:parentActivityName=".ViewGroupActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arshsingh93.unaapp.ViewGroupActivity" />
+        </activity>
+        <activity
+            android:name=".ViewBlogActivity"
+            android:label="@string/title_activity_view_blog"
+            android:parentActivityName=".SelectBlogActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.SelectBlogActivity" />
+        </activity>
+        <activity
+            android:name=".WriteBlogActivity"
+            android:label="@string/title_activity_write_blog"
+            android:parentActivityName=".SelectBlogActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.SelectBlogActivity" />
+        </activity>
+        <activity
+            android:name=".SavedBlogsActivity"
+            android:label="@string/title_activity_saved_blogs"
+            android:parentActivityName=".SelectBlogActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.arshsingh93.unaapp.SelectBlogActivity" />
         </activity>
     </application>
 

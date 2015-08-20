@@ -161,7 +161,6 @@
         android:layout_above="@+id/editGroupBlogCheck"
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
-        android:tint="@android:color/holo_red_dark"
         android:background="@android:color/holo_red_light"
         android:baselineAlignBottom="true" />
 
@@ -172,16 +171,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/scrollView"
         android:layout_alignEnd="@+id/scrollView"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:id="@+id/linearLayout2">
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Member"
-            android:id="@+id/EditGroupMemberbutton"
+            android:id="@+id/editGroupMemberbutton"
             android:buttonTint="@android:color/holo_red_dark"
-            android:layout_alignBottom="@+id/EditGroupButton"
+            android:layout_alignBottom="@+id/editGroupSaveButton"
             android:layout_toEndOf="@+id/editGroupPrivateButton"
             android:layout_below="@+id/scrollView"
             android:layout_toRightOf="@+id/editGroupPrivateButton"
@@ -192,13 +192,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save Group"
-            android:id="@+id/EditGroupButton"
+            android:id="@+id/editGroupSaveButton"
             android:layout_alignParentBottom="true"
             android:textColor="#ffffff"
             android:layout_toLeftOf="@+id/edtGroupNameText"
             android:layout_toStartOf="@+id/edtGroupNameText"
             android:layout_weight="1" />
+
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editGroupProgressBar"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false" />
 
 
 </RelativeLayout>

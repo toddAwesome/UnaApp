@@ -20,6 +20,9 @@ public class TheGroupUtil {
     public static String GROUP_SIZE = "GroupSize";
     public static String GROUP_PHOTO = "GroupPhoto";
 
+    public static String GROUP_ID = "objectId";
+    public static String GROUP_BLOG = "GroupBlogs";
+
     public static String GROUP_PUBLIC = "public";
     public static String GROUP_PRIVATE = "private";
 

@@ -1,7 +1,6 @@
 package com.arshsingh93.unaapp;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
@@ -53,8 +51,10 @@ public class EditGroupActivity extends AppCompatActivity {
     @Bind(R.id.editGroupBlogCheck) CheckBox myBlogCheck;
     @Bind(R.id.editGroupCalendarCheck) CheckBox myCalendarCheck;
     @Bind(R.id.editGroupPhoto) ImageView myPhoto;
-    @Bind(R.id.EditGroupButton) Button mySaveButton;
-    @Bind(R.id.EditGroupMemberbutton) Button myEditMembersButton;
+
+    @Bind(R.id.editGroupProgressBar) ProgressBar myProgressBar;
+    @Bind(R.id.editGroupSaveButton) Button mySaveButton;
+    @Bind(R.id.editGroupMemberbutton) Button myEditMembersButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,8 @@ public class EditGroupActivity extends AppCompatActivity {
         setTheme(R.style.RedTheme);
         setContentView(R.layout.activity_edit_group);
         ButterKnife.bind(this);
+
+        myProgressBar.setVisibility(View.INVISIBLE);
 
 
         mySaveButton.setBackgroundColor(TheColorUtil.getDarkProperColor());
@@ -87,6 +89,7 @@ public class EditGroupActivity extends AppCompatActivity {
                     if (e == null) {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                         myPhoto.setImageBitmap(bitmap);
+                        myPhoto.setBackgroundColor(0xFFffffff);
                     } else {
                         //unable to load image. //TODO
                     }
@@ -118,14 +121,15 @@ public class EditGroupActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.EditGroupButton)
+    @OnClick(R.id.editGroupSaveButton)
     public void editGroup() {
-        final ParseObject groupObject = new ParseObject("Group");
+        myProgressBar.setVisibility(View.VISIBLE);
+
+        final ParseObject groupObject = TheGroupUtil.getCurrentGroup();
 
         if (editValid()) {
             groupObject.put(TheGroupUtil.GROUP_NAME, myName.getText().toString());
             groupObject.put(TheGroupUtil.GROUP_TYPE, getGroupType());
-            groupObject.put(TheGroupUtil.GROUP_FOUNDER, ParseUser.getCurrentUser());
             groupObject.put(TheGroupUtil.GROUP_ONE_WORD, myOneWord.getText().toString());
             groupObject.put(TheGroupUtil.GROUP_LENGTHY_DESCRIPTION, myDescription.getText().toString());
             groupObject.put(TheGroupUtil.GROUP_BLOG_EXIST, getBlogCheck());
@@ -135,13 +139,19 @@ public class EditGroupActivity extends AppCompatActivity {
                 groupObject.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        //send user to the group looker page.
+                        myProgressBar.setVisibility(View.INVISIBLE);
+                        if (e == null) {
+                            //send user to the group looker page.
+                            Intent intent = new Intent(EditGroupActivity.this, ViewGroupActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 });
             } else {
+                myProgressBar.setVisibility(View.INVISIBLE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Network is currently unavailable")
-                        .setMessage("This group will be created and shared with the world automatically once network is connected!");
+                        .setMessage("This group will be updated and shared with the world automatically once network is connected!");
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -153,16 +163,13 @@ public class EditGroupActivity extends AppCompatActivity {
 
             }
         } else {
+            myProgressBar.setVisibility(View.INVISIBLE);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Can not create group").setMessage("Please make sure all of the information is filled out");
+            builder.setTitle("Cannot create group").setMessage("Please make sure all of the information is filled out");
             builder.setPositiveButton(android.R.string.ok, null);
             builder.show();
         }
-        myPhoto.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
 
-            }
-        });
     }
     /**
      * Checks to see if the group should be allowed to be created.
@@ -189,6 +196,8 @@ public class EditGroupActivity extends AppCompatActivity {
         //default
         return TheGroupUtil.GROUP_PUBLIC;
     }
+
+
     /**
      * Checks to see if the blog button is marked.
      * @return true if it is.
@@ -196,6 +205,16 @@ public class EditGroupActivity extends AppCompatActivity {
     private boolean getBlogCheck() {
         return myBlogCheck.isChecked();
     }
+
+    @OnClick (R.id.editGroupPhoto)
+    public void editPhoto() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setItems(R.array.camera_choices, mDialogInterface);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
     /**
      * Checks to see if the calendar button is checked.
      * @return true if it is.
@@ -216,9 +235,8 @@ public class EditGroupActivity extends AppCompatActivity {
             byte[] array = stream.toByteArray();
             ParseFile file = new ParseFile("profilePic.jpeg", array);
             file.saveInBackground();
-            ParseUser.getCurrentUser().put("profilePic", file);
-            ParseUser.getCurrentUser().saveInBackground(); //is this necessary?
-
+            TheGroupUtil.getCurrentGroup().put(TheGroupUtil.GROUP_PHOTO, file);
+            TheGroupUtil.getCurrentGroup().saveInBackground();
 
         } catch (FileNotFoundException e) {
             Log.e("ProfileFragment", "Error: " + e);
@@ -277,7 +295,6 @@ public class EditGroupActivity extends AppCompatActivity {
                     break;
             }
         }
-
         private Uri getOutputMediaFileUri(int theMediaType) {
             if (isExternalStorageAvailable()) {
                 //get the Uri
@@ -312,7 +329,6 @@ public class EditGroupActivity extends AppCompatActivity {
                 return null;
             }
         }
-
         private boolean isExternalStorageAvailable() {
             String state = Environment.getExternalStorageState();
             if (state.equals(Environment.MEDIA_MOUNTED)) {

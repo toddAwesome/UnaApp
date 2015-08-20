@@ -71,6 +71,9 @@ public class CreateGroupActivity extends AppCompatActivity {
 
             groupObject.put(TheGroupUtil.GROUP_SIZE, 1); //the first member is the founder.
 
+            //ParseRelation blogRelation = TheGroupUtil.getCurrentGroup().getRelation(TheGroupUtil.GROUP_BLOG); //empty at first, no need to do anything with this in this class.
+
+
             if (TheNetUtil.isNetworkAvailable(this)) {
                 Toast.makeText(this, "network is available", Toast.LENGTH_SHORT).show();
                 groupObject.saveInBackground(new SaveCallback() {

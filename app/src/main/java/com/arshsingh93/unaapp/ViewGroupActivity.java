@@ -84,6 +84,7 @@ public class ViewGroupActivity extends AppCompatActivity {
                     if (e == null) {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                         myPhoto.setImageBitmap(bitmap);
+                        myPhoto.setBackgroundColor(0xFFffffff);
                     } else {
                         //unable to load image. //TODO
                     }
@@ -120,8 +121,11 @@ public class ViewGroupActivity extends AppCompatActivity {
     }
 
 
-    //TODO onClick for the Blog button should open up a screen which has a list of blogs, buttons to create/load blogs. Locked blogs at top.
-
+     @OnClick (R.id.viewGroupBlogImage)
+    public void seeBlogs() {
+        Intent intent = new Intent(this, SelectBlogActivity.class);
+        startActivity(intent);
+    }
 
 
 

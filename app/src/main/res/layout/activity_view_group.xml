@@ -19,8 +19,7 @@
         android:src="@drawable/ic_portrait_white_48dp"
         android:maxHeight="160dp"
         android:minHeight="160dp"
-        android:background="@android:color/holo_red_light"
-        android:tint="@android:color/holo_red_dark" />
+        android:background="@android:color/holo_red_light" />
 
     <LinearLayout
         android:orientation="horizontal"
